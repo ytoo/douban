@@ -7,22 +7,23 @@
     <link rel="stylesheet" href="css/base.css">
 </head>
 <body ng-app="app">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" ng-controller="navBarCtrl">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">movieCat</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a ng-href="#!/in_theaters">正在热映</a></li>
-                    <li><a href="#">即将上映</a></li>
+                    <!--点击事件要加在li上面，不能加在a标签上，因为a标签本身会根据href发生跳转，再加点击事件会有冲突-->
+                    <li ng-click="isActive = 'in_theaters'" ng-class="{'active':isActive == 'in_theaters'}"><a ng-href="#!/in_theaters/1" >正在热映</a></li>
+                    <li ng-click="isActive = 'coming_soon'" ng-class="{'active':isActive == 'coming_soon'}"><a ng-href="#!/coming_soon/1" >即将上映</a></li>
                     <li><a href="#">Top250</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="请输入搜索内容">
+                        <input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="keyword">
                     </div>
-                    <button type="button" class="btn btn-default">搜索</button>
+                    <button type="button" class="btn btn-default" ng-click="search()">搜索</button>
                 </form>
             </div>
         </div>
